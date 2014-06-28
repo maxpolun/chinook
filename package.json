@@ -1,0 +1,29 @@
+{
+  "name": "chinook",
+  "description": "Migrations using node or sql",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/maxpolun/chinook"
+  },
+  "version": "0.0.1",
+  "author": "Max Polun",
+  "licence": "ISC",
+  "main": "lib/chinook.js",
+  "bin": "main.js",
+  "dependencies": {
+    "bluebird": "^1.0.0",
+    "epr": "^0.0.1",
+    "lodash": "^2.4.1",
+    "minimist": "^0.2.0",
+    "pg": "^2.11.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.2",
+    "eslint-grunt": "^0.4.1",
+    "grunt-concurrent": "~0.4.3",
+    "grunt-contrib-watch": "^0.5.3",
+    "minijasminenode": "^1.0.0",
+    "grunt-node-inspector": "^0.1.2",
+    "jasmine2-pit": "*"
+  }
+}
