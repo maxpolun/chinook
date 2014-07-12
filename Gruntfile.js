@@ -2,7 +2,7 @@
 module.exports = function(grunt) {
   var config = {}
   config.pkg = grunt.file.readJSON('package.json')
-  config.nodefiles = ['server.js','lib/**/*.js','lib/*.js']
+  config.nodefiles = ['main.js','lib/**/*.js','lib/*.js']
   config.nodespecfiles = ['spec/**/*Spec.js']
   config.browserfiles = []
   config.browserspecfiles = []
@@ -10,27 +10,15 @@ module.exports = function(grunt) {
   config.backendFiles = config.nodespecfiles.concat(config.nodefiles)
   config.frontendFiles = config.browserfiles.concat(config.browserspecfiles)
   config.allCodeFiles = config.nodefiles.concat(config.browserfiles)
-  config.allSpecFiles = config.nodespecfiles.concat(config.browserspecfiles)
+  config.allSpecFiles = config.nodespecfiles.concat(config.browserspecfiles).concat(config.e2efiles)
   config.allJS = config.backendFiles.concat(config.frontendFiles)
 
   config.concurrent = {
     dev: {
-      tasks: ['nodemon', 'node-inspector', 'watch'],
+      tasks: ['node-inspector', 'watch'],
       options: {
         logConcurrentOutput: true
       }
-    }
-  }
-
-  config.nodemon = {
-    dev: {
-      script: 'server.js',
-      options: {
-        nodeArgs: ['--debug']
-      }
-    },
-    options: {
-      ignore: ['app/**', '<%= allSpecFiles %>', '.grunt/**']
     }
   }
 
@@ -81,13 +69,12 @@ module.exports = function(grunt) {
   grunt.initConfig(config)
   grunt.loadNpmTasks('eslint-grunt')
   grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-nodemon')
   grunt.loadNpmTasks('grunt-node-inspector')
   grunt.loadNpmTasks('grunt-concurrent')
 
   grunt.registerMultiTask('spec', 'Run node jasmine specs', function(){
     var done = this.async();
-    var jasmineLib = require('minijasminenode');
+    var jasmineLib = require('minijasminenode2');
     this.data.specs = grunt.file.expand(this.data.specs)
     this.data.onComplete = done
     jasmineLib.executeSpecs(this.data)

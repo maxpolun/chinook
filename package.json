@@ -10,19 +10,28 @@
   "licence": "ISC",
   "main": "lib/chinook.js",
   "bin": "main.js",
+  "epr": {
+    "databaseConnection": "lib/DatabaseConnection",
+    "fixture": "lib/fixture",
+    "testUtil.js": "lib/testUtil.js"
+  },
   "dependencies": {
-    "bluebird": "^1.0.0",
+    "bluebird": "^2.0.0",
     "epr": "^0.0.1",
+    "fixture-dir": "^0.1.0",
     "lodash": "^2.4.1",
     "minimist": "^0.2.0",
-    "pg": "^2.11.0"
+    "ncp": "^0.6.0",
+    "pg": "^2.11.0",
+    "rimraf": "^2.2.8",
+    "tmp": "0.0.23"
   },
   "devDependencies": {
     "grunt": "^0.4.2",
     "eslint-grunt": "^0.4.1",
     "grunt-concurrent": "~0.4.3",
     "grunt-contrib-watch": "^0.5.3",
-    "minijasminenode": "^1.0.0",
+    "minijasminenode2": "^1.0.0",
     "grunt-node-inspector": "^0.1.2",
     "jasmine2-pit": "*"
   }
