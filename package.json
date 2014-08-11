@@ -13,12 +13,12 @@
   "epr": {
     "databaseConnection": "lib/DatabaseConnection",
     "fixture": "lib/fixture",
-    "testUtil.js": "lib/testUtil.js"
+    "testUtil.js": "lib/testUtil.js",
+    "migration": "lib/migration"
   },
   "dependencies": {
     "bluebird": "^2.0.0",
     "epr": "^0.0.1",
-    "fixture-dir": "^0.1.0",
     "lodash": "^2.4.1",
     "minimist": "^0.2.0",
     "ncp": "^0.6.0",

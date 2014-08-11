@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 
   config.watch = {
     nodeSpecs: {
-      files: config.backendFiles,
+      files: config.allJS,
       tasks: 'spec'
     },
     lint: {
