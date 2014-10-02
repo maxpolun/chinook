@@ -15,7 +15,7 @@
     "fixture": "lib/fixture",
     "testUtil.js": "lib/testUtil.js",
     "migration": "lib/migration",
-    "migrationPlan": "lib/migrationPlan"
+    "migrationPlan": "lib/migrationPlan.js"
   },
   "dependencies": {
     "bluebird": "^2.0.0",
