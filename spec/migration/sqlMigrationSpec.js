@@ -7,20 +7,20 @@ var SqlMigration = require('migration').SqlMigration,
 require('jasmine2-pit')
 
 describe('SqlMigration', function(){
-  var client
+  var db
   beforeEach(function(){
-    client = jasmine.createSpyObj('client', ['query', 'done'])
+    db = jasmine.createSpyObj('db', ['query', 'done'])
   })
   it('should be created', function(){
-    var migration = new SqlMigration('')
+    var migration = new SqlMigration('testMigration', '')
     expect(migration).not.toBeUndefined()
   })
   describe('migrate', function(){
-    pit('should call client.query with the given sql', function(){
-      var migration = new SqlMigration('SELECT 1;')
-      client.query.and.returnValue(Promise.resolve(true))
-      return migration.migrate(client).then(function(){
-        expect(client.query).toHaveBeenCalledWith('SELECT 1;')
+    pit('should call db.query with the given sql', function(){
+      var migration = new SqlMigration('testMigration', 'SELECT 1;')
+      db.query.and.returnValue(Promise.resolve(true))
+      return migration.migrate(db).then(function(){
+        expect(db.query).toHaveBeenCalledWith('SELECT 1;')
       })
     })
   })
@@ -40,6 +40,11 @@ describe('SqlMigration', function(){
     pit('should call fs', function(){
       return promise.then(function(){
         expect(fs.readFile).toHaveBeenCalledWith('migrations/001-first-migration/up.sql', jasmine.any(Function))
+      })
+    })
+    pit('should have the right ID', function(){
+      return promise.then(function(migration){
+        expect(migration.id).toEqual('001-first-migration')
       })
     })
   })

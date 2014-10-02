@@ -14,7 +14,8 @@
     "databaseConnection": "lib/DatabaseConnection",
     "fixture": "lib/fixture",
     "testUtil.js": "lib/testUtil.js",
-    "migration": "lib/migration"
+    "migration": "lib/migration",
+    "migrationPlan": "lib/migrationPlan"
   },
   "dependencies": {
     "bluebird": "^2.0.0",
