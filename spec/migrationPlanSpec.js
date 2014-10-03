@@ -53,7 +53,6 @@ describe('migrationPlan', function(){
     pit('should execute multiple migrations', function() {
       var plan = new MigrationPlan()
       function fakeMigrate(num) { return function(db) {
-        console.log('running query', num)
         db.query('SELECT ' + num + ';')
         return Promise.resolve(null)
       }}

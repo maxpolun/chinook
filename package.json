@@ -10,12 +10,16 @@
   "licence": "ISC",
   "main": "lib/chinook.js",
   "bin": "main.js",
+  "scripts": {
+      "postinstall": "epr"
+    },
   "epr": {
     "databaseConnection": "lib/DatabaseConnection",
     "fixture": "lib/fixture",
     "testUtil.js": "lib/testUtil.js",
     "migration": "lib/migration",
-    "migrationPlan": "lib/migrationPlan.js"
+    "migrationPlan": "lib/migrationPlan.js",
+    "migrationFiles": "lib/migrationFiles.js"
   },
   "dependencies": {
     "bluebird": "^2.0.0",
