@@ -15,10 +15,12 @@ describe('migrations up', function(){
       })
     })
   })
-  pit('run an sql migration', function(){
-    return Promise.using(testUtil.fixture(__dirname, 'sql-migration'), function(dir){
-      return testUtil.runCmd(dir, ['up']).then(function(){
-        return testUtil.expectTableToExist('users')
+  describe('one sql migration', function(){
+    pit('should run the migration sql', function(){
+      return Promise.using(testUtil.fixture(__dirname, 'sql-migration'), function(dir){
+        return testUtil.runCmd(dir, ['up']).then(function(){
+          return testUtil.expectTableToExist('users')
+        })
       })
     })
   })
