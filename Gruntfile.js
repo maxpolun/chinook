@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   config.frontendFiles = config.browserfiles.concat(config.browserspecfiles)
   config.allCodeFiles = config.nodefiles.concat(config.browserfiles)
   config.allSpecFiles = config.nodespecfiles.concat(config.browserspecfiles).concat(config.e2efiles)
-  config.allJS = config.backendFiles.concat(config.frontendFiles)
+  config.allJS = config.backendFiles.concat(config.frontendFiles).concat(config.allSpecFiles)
 
   config.concurrent = {
     dev: {
