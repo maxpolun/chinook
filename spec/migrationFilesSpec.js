@@ -7,7 +7,7 @@ var migrationFiles = require('migrationFiles'),
 describe('migrationFiles', function(){
   pit('should find files', function(){
     return Promise.using(fixture(__dirname, 'single-migration'), function(dir) {
-      var filesPromise = migrationFiles(dir),
+      var filesPromise = migrationFiles(path.join(dir, 'migrations')),
           upfile = path.join(dir, 'migrations', '1234567890-test', 'up.sql'),
           downfile = path.join(dir, 'migrations', '1234567890-test', 'down.js')
       return filesPromise.then(function(files){
