@@ -59,8 +59,11 @@ Some important keys:
 
 Each migration is a directory with 2 files, up and down. They should be named
 up.js/down.js for migrations that use javascript, and up.sql/down.sql for migrations
-that are defined using sql.
+that are defined using sql. If there is a ```verify.sql``` or ```verify.js``` this 
+will be run after the up migration and the migration will be rolled back if the verify 
+script fails.
 
 The name of each migration directory should be [some number]-text-and-possibly-more-dashes.
 The number is used to order the migrations so they can be numbered like 001, 002, etc
-or they can be numbered with the current unix time (which is what the ```chinook new``` command)
+or they can be numbered with the current unix time (which is what the ```chinook new``` 
+command will generate).
