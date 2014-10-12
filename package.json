@@ -16,10 +16,11 @@
   "epr": {
     "databaseConnection": "lib/DatabaseConnection",
     "fixture": "lib/fixture",
-    "testUtil.js": "lib/testUtil.js",
+    "testUtil": "lib/testUtil.js",
     "migration": "lib/migration",
     "migrationPlan": "lib/migrationPlan.js",
-    "migrationFiles": "lib/migrationFiles.js"
+    "migrationFiles": "lib/migrationFiles.js",
+    "migrationTracker": "lib/migrationTracker.js"
   },
   "dependencies": {
     "bluebird": "^2.0.0",
