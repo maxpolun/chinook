@@ -12,12 +12,12 @@ describe('SqlMigration', function(){
     db = jasmine.createSpyObj('db', ['query', 'done'])
   })
   it('should be created', function(){
-    var migration = new SqlMigration('testMigration', '')
+    var migration = new SqlMigration('001-testMigration', '')
     expect(migration).not.toBeUndefined()
   })
   describe('migrate', function(){
     pit('should call db.query with the given sql', function(){
-      var migration = new SqlMigration('testMigration', 'SELECT 1;')
+      var migration = new SqlMigration('001-testMigration', 'SELECT 1;')
       db.query.and.returnValue(Promise.resolve(true))
       return migration.migrate(db).then(function(){
         expect(db.query).toHaveBeenCalledWith('SELECT 1;')

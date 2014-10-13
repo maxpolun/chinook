@@ -15,23 +15,7 @@ describe('migrations up', function(){
       })
     })
   })
-  describe('one sql migration', function(){
-    pit('should run the migration sql', function(){
-      return Promise.using(testUtil.fixture(__dirname, 'sql-migration'), function(dir){
-        return testUtil.runCmd(dir, ['up']).then(function(){
-          return testUtil.expectTableToExist('users')
-        })
-      })
-    })
-    pit('should update the migrations_complete table', function(){
-      return Promise.using(testUtil.fixture(__dirname, 'sql-migration'), function(dir){
-        return testUtil.runCmd(dir, ['up']).then(function(){
-          return testUtil.migrationIsMarkedComplete('2014071512345')
-        })
-      })
-    })
-  })
-  describe('multiple sql migrations', function(){
+  describe('sql migrations', function(){
     pit('should run the sql', function(){
       return Promise.using(testUtil.fixture(__dirname, 'multiple-sql-migrations'), function(dir){
         return testUtil.runCmd(dir, ['up']).then(function(){
