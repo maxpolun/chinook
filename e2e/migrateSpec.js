@@ -37,4 +37,16 @@ describe('migrations up', function(){
       })
     })
   })
+  pit('should only run migrations that have not been run already', function(){
+    return Promise.using(testUtil.fixture(__dirname, 'multiple-sql-migrations'), function(dir){
+      return testUtil.upMigration(dir, '001-create-users').then(function(){
+        return testUtil.runCmd(dir, ['up'])  
+      }).then(function(){
+        return Promise.all([
+          testUtil.expectTableToExist('users'), 
+          testUtil.expectTableToExist('thingies')
+        ])
+      })
+    })
+  })
 })
