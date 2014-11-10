@@ -47,8 +47,7 @@ describe('MigrationTracker', function(){
       })
     })
   })
-  describe('up', function(){
-    
+  describe('once the database has been created', function(){
     beforeEach(function(done){
       Promise.using(databaseConnection(testUtil.dbUrl), function(db){
         var tracker = new MigrationTracker(db, {table: testTable})
@@ -57,38 +56,47 @@ describe('MigrationTracker', function(){
         })
       }).finally(done)
     })
-    pit('will update the database', function(){
-      return Promise.using(databaseConnection(testUtil.dbUrl), function(db){
-        var tracker = new MigrationTracker(db, {table: testTable})
-        return tracker.up('12345').then(function(){
-          return testUtil.migrationIsMarkedComplete('12345', testTable)
+
+    describe('up', function(){
+      pit('will update the database', function(){
+        return Promise.using(databaseConnection(testUtil.dbUrl), function(db){
+          var tracker = new MigrationTracker(db, {table: testTable})
+          return tracker.up('12345').then(function(){
+            return testUtil.migrationIsMarkedComplete('12345', testTable)
+          })
         })
       })
     })
-  })
-  describe('down', function(){
-    beforeEach(function(done){
-      Promise.using(databaseConnection(testUtil.dbUrl), function(db){
-        var tracker = new MigrationTracker(db, {table: testTable})
-        return db.query('DROP TABLE IF EXISTS ' + testTable + ';').then(function(){
-          return tracker.create()
+    describe('down', function(){
+      pit('will update the database', function(){
+        return Promise.using(databaseConnection(testUtil.dbUrl), function(db){
+          var tracker = new MigrationTracker(db, {table: testTable})
+          return tracker.up('12345').then(function(){
+            return tracker.down('12345')
+          }).then(function(){
+            return testUtil.migrationIsMarkedComplete('12345', testTable)
+          }).then(function(){
+            throw 'migration should not be marked complete, but was'
+          }).catch(testUtil.SqlError, function(){
+            return 'SqlError is expected'
+          })
         })
-      }).finally(done)
+      })
     })
-    pit('will update the database', function(){
-      return Promise.using(databaseConnection(testUtil.dbUrl), function(db){
-        var tracker = new MigrationTracker(db, {table: testTable})
-        return tracker.up('12345').then(function(){
-        }).then(function(){
-          return tracker.down('12345')
-        }).then(function(){
-          return testUtil.migrationIsMarkedComplete('12345', testTable)
-        }).then(function(){
-          throw 'migration should not be marked complete, but was'
-        }).catch(testUtil.SqlError, function(){
-          return 'SqlError is expected'
+    describe('current', function(){
+      pit('will fetch the current version of the database', function(){
+        return Promise.using(databaseConnection(testUtil.dbUrl), function(db){
+          var tracker = new MigrationTracker(db, {table: testTable})
+          return tracker.up('12345').then(function(){
+            return tracker.up('12346')
+          }).then(function(){
+            return tracker.current()
+          }).then(function(version){
+            expect(version).toEqual('12346')
+          })
         })
       })
     })
   })
 })
+
