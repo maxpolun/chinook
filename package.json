@@ -20,7 +20,8 @@
     "migration": "lib/migration",
     "migrationPlan": "lib/migrationPlan.js",
     "migrationFiles": "lib/migrationFiles.js",
-    "migrationTracker": "lib/migrationTracker.js"
+    "migrationTracker": "lib/migrationTracker.js",
+    "migrationTarget": "lib/migrationTarget.js"
   },
   "dependencies": {
     "bluebird": "^2.0.0",

@@ -39,7 +39,9 @@ describe('migrations up', function(){
   })
   pit('should only run migrations that have not been run already', function(){
     return Promise.using(testUtil.fixture(__dirname, 'multiple-sql-migrations'), function(dir){
-      return testUtil.upMigration(dir, '001-create-users').then(function(){
+      return testUtil.runSql('CREATE TABLE IF NOT EXISTS migrations_complete (migration_version varchar)').then(function(){
+        return testUtil.upMigration(dir, '001-create-users')
+      }).then(function(){
         return testUtil.runCmd(dir, ['up'])  
       }).then(function(){
         return Promise.all([
