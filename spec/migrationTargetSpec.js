@@ -20,23 +20,22 @@ describe('MigrationTarget', function(){
         }],
       filesNone = []
   it('can be created', function(){
-    target = new MigrationTarget(Infinity, filesNone, MigrationTarget.ZERO_MIGRATION)
+    target = new MigrationTarget(Infinity, filesNone, {}, MigrationTarget.ZERO_MIGRATION)
     expect(target).not.toBeUndefined()
   })
   describe('plan', function(){
     it('should create a migrationPlan', function(){
-      target = new MigrationTarget(Infinity, filesNone, MigrationTarget.ZERO_MIGRATION)
+      target = new MigrationTarget(Infinity, filesNone, {}, MigrationTarget.ZERO_MIGRATION)
       expect(target.plan()).toEqual(jasmine.any(MigrationPlan))
     })
     it('should return an empty plan if there are no files', function(){
-      target = new MigrationTarget(Infinity, filesNone, MigrationTarget.ZERO_MIGRATION)
+      target = new MigrationTarget(Infinity, filesNone, {}, MigrationTarget.ZERO_MIGRATION)
       var plan = target.plan()
       expect(plan.count()).toEqual(0)
     })
     describe('with no existing migrations', function(){
       it('should contain all migrations up to target', function(){
-
-        target = new MigrationTarget(MigrationTarget.LAST_MIGRATION, filesMany, MigrationTarget.ZERO_MIGRATION)
+        target = new MigrationTarget(MigrationTarget.LAST_MIGRATION, filesMany, {}, MigrationTarget.ZERO_MIGRATION)
         var plan = target.plan()
         expect(plan.count()).toEqual(2)
         expect(plan._migrations[0].version).toEqual('001')
@@ -45,7 +44,7 @@ describe('MigrationTarget', function(){
     })
     describe('with existing migrations', function(){
       it('should contain only migrations after the current migration', function(){
-        target = new MigrationTarget(MigrationTarget.LAST_MIGRATION, filesMany, '001')
+        target = new MigrationTarget(MigrationTarget.LAST_MIGRATION, filesMany, {}, '001')
         var plan = target.plan()
         expect(plan.count()).toEqual(1)
         expect(plan._migrations[0].version).toEqual('002')
